@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Onboarding } from "@/screens";
+import "react-native-gesture-handler";
+import * as Navbar from "expo-navigation-bar";
+import { useEffect } from "react";
+import { Platform, StatusBar } from "react-native";
+import { colors } from "@/misc/colors";
+import "react-native-gesture-handler";
+import "react-native-reanimated";
 
 export default function App() {
+  useEffect(() => {
+    if (Platform.OS == "android") {
+      Navbar.setBackgroundColorAsync(colors.background);
+    }
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar
+        barStyle={"dark-content"}
+        backgroundColor={colors.background}
+      />
+      <Onboarding />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
